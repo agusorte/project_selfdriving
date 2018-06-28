@@ -67,7 +67,7 @@ And the pre-trained weight from YOLO v3 can be found here:
 In order to install project_selfdriving we need to clone the repo 
 
     cd catkin_workspace/src
-    git clone https://github.com/leggedrobotics/darknet_ros/darknet_ros.git
+    git clone https://github.com/agusorte/project_selfdriving
     
 then build catking
 
