@@ -46,6 +46,13 @@ then build catking
 
 	catkin_make -DCMAKE_BUILD_TYPE=Release
 
+### Compiling with ubuntu 18 and cuda 9.0
+
+Yolo supports CUDA that accelerates 500 faster the processing but just supported with compilers smaller than version 6. To compile 
+
+	catkin_make -DCMAKE_CXX_COMPILER=/usr/bin/g++-6 -DCMAKE_C_COMPILER=/usr/bin/gcc-6
+	
+	
 ### Download weights for YOLO
 
 The yolo-voc.weights and tiny-yolo-voc.weights are downloaded automatically in the CMakeLists.txt file. If you need to download them again, go into the weights folder and download the two pre-trained weights from the COCO data set:
