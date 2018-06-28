@@ -41,7 +41,7 @@ In order to install project_selfdriving we need to unzip the code.zip file to ca
     
 then build catking
 
-$catkin_make -DCMAKE_BUILD_TYPE=Release
+	catkin_make -DCMAKE_BUILD_TYPE=Release
 
 ### Download weights for YOLO
 
@@ -61,37 +61,41 @@ In order to install project_selfdriving we need to clone the repo
     
 then build catking
 
-$catkin_make -DCMAKE_BUILD_TYPE=Release
+   	catkin_make -DCMAKE_BUILD_TYPE=Release
 
 ## Download Datasets
+
 
 ## Nodes
 
 ### Node: project_selfdriving_node
 
-This is the main YOLO ROS: Real-Time Object Detection for ROS node. It uses the camera measurements to detect pre-learned objects in the frames.    
+This node connect YOLO and some BB algortihms for generating tags  
 
 ## Running nodes                   
 
 
 ## Setting
 
+You want to test with your datasets then you need to modidy the following files inside of config/: ros.yalm, cam_calib.yalm, setting.yalm. These files contain all the topic read and written (publishes and subscribers).
+
+
 you can modify camera calibration parameres using the follofing file:
 
-project_selfdriving/config/cam_calib.yalm
+	project_selfdriving/config/cam_calib.yalm
 
 you can modify topics 
 
-project_velodyne/config/settings.yalm
+	project_velodyne/config/settings.yalm
 
 
 ## saving bounding boxes
 
 All the date saved are in a kitti files that contains the bounding box associates with the images (2D) and pointclouds (3D)
 
-
 kitty format file is saved in:
-project_selfdriving/data/kitti_file.txt
+
+   	project_selfdriving/data/kitti_file.txt
 
 # Final comments
 
