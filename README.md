@@ -12,20 +12,21 @@ This code have been tested under ROS Kinetic and Ubuntu 16.04. This is research 
 
 **Author: [Agustin Ortega](https://github.com/agusorte), aortega.jim@gmail.com**
 
-### Installation
+## Installation
 
 dependences
--[ROS] (http://www.ros.org/) Kinect or bigger (this code was tested in with melodic and kinect)
--[YOLO](https://github.com/leggedrobotics/darknet_ros) 
+
+- [ROS] (http://www.ros.org/) Kinect or bigger (this code was tested in with melodic and kinect)
+- [YOLO](https://github.com/leggedrobotics/darknet_ros) 
 	
--[PCL]
+- [PCL] (http://pointclouds.org/) (Point Cloud Library)
 - [OpenCV](http://opencv.org/) (computer vision library),
-- [boost](http://www.boost.org/) (c++ library),
--Eigen
+- [boost](http://www.boost.org/) (Boost library),
+- [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) (Eigen)
 
-### Building
+## Building
 
-#### creating catkin space
+### creating catkin space
 we need to have a catkin space created, follow theses intructions to install catkin (see the link below):
 
 http://wiki.ros.org/catkin/Tutorials/create_a_workspace
@@ -42,11 +43,18 @@ then build catking
 
 $catkin_make -DCMAKE_BUILD_TYPE=Release
 
-Running the ros node:
+### Download weights for YOLO
 
-### Project
+The yolo-voc.weights and tiny-yolo-voc.weights are downloaded automatically in the CMakeLists.txt file. If you need to download them again, go into the weights folder and download the two pre-trained weights from the COCO data set:
 
-In order to install project_selfdriving we need to unzip the code.zip file to catkin_ws 
+And the pre-trained weight from YOLO v3 can be found here:
+
+    wget http://pjreddie.com/media/files/yolov3-voc.weights
+    wget http://pjreddie.com/media/files/yolov3.weights
+
+### Project dowload and building
+
+In order to install project_selfdriving we need to clone the repo 
 
     cd catkin_workspace/src
     git clone https://github.com/leggedrobotics/darknet_ros/darknet_ros.git
@@ -55,30 +63,42 @@ then build catking
 
 $catkin_make -DCMAKE_BUILD_TYPE=Release
 
-Running the ros node:
+## Download Datasets
+
+## Nodes
+
+### Node: project_selfdriving_node
+
+This is the main YOLO ROS: Real-Time Object Detection for ROS node. It uses the camera measurements to detect pre-learned objects in the frames.    
+
+## Running nodes                   
 
 
-# Setting
+## Setting
 
-you can modify camera calibration parameres using the wollofing file
+you can modify camera calibration parameres using the follofing file:
 
-project_velodyne/config/cam_calib.yalm
+project_selfdriving/config/cam_calib.yalm
 
 you can modify topics 
 
 project_velodyne/config/settings.yalm
 
-kitti file
+
+## saving bounding boxes
+
+All the date saved are in a kitti files that contains the bounding box associates with the images (2D) and pointclouds (3D)
+
 
 kitty format file is saved in:
-project_velodyne/data/kitti_file.txt
+project_selfdriving/data/kitti_file.txt
 
 # Final comments
 
 Bounding box is creation is not perfect because:
 - incomplete pointcloud,
 - noisy points clouds
-- small delay 
+- small delay( YOLO runs in GPU 500 faster than PCL for projecting and generating bounbing boxes)
 
 idea to solve this issue is to have a clustering to add the complete pointscloud 
 

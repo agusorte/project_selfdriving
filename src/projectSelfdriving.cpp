@@ -183,31 +183,35 @@ void ProjectSelfdriving::callback(const sensor_msgs::ImageConstPtr& msg,
     }
 
     // find closest point to avoid noisy points
-    // pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
 
-    // kdtree.setInputCloud (subcloud);
+    if(subcloud->points.size()>10){
 
-    // int K = 600;
+      pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
 
-    // std::vector<int> pointIdxNKNSearch(K);
-    // std::vector<float> pointNKNSquaredDistance(K);
-    // pcl::PointXYZ minPt, maxPt;
-    // pcl::getMinMax3D (*subcloud, minPt, maxPt);
-    // PointCloud<PointXYZ>::Ptr subclouda(new PointCloud<PointXYZ>);
+      kdtree.setInputCloud (subcloud);
 
+      int K = 300;
 
-    // if ( kdtree.nearestKSearch (minPt, K, pointIdxNKNSearch, pointNKNSquaredDistance) > 0 )
-    // {
-    //   for (size_t ii = 0; ii < pointIdxNKNSearch.size (); ++ii){
-    //     subclouda->points.push_back(subcloud->points[ pointIdxNKNSearch[ii] ]);
-    //     cloudSeg->push_back(subcloud->points[ pointIdxNKNSearch[ii] ]);
-    //   }
-
-    // }
-
-    // cloudObjs.push_back(subclouda);
+      std::vector<int> pointIdxNKNSearch(K);
+      std::vector<float> pointNKNSquaredDistance(K);
+      pcl::PointXYZ minPt, maxPt;
+      pcl::getMinMax3D (*subcloud, minPt, maxPt);
+      PointCloud<PointXYZ>::Ptr subclouda(new PointCloud<PointXYZ>);
 
 
+      if ( kdtree.nearestKSearch (minPt, K, pointIdxNKNSearch, pointNKNSquaredDistance) > 0 )
+      {
+        for (size_t ii = 0; ii < pointIdxNKNSearch.size (); ++ii){
+          subclouda->points.push_back(subcloud->points[ pointIdxNKNSearch[ii] ]);
+          cloudSeg->push_back(subcloud->points[ pointIdxNKNSearch[ii] ]);
+        }
+
+      }
+
+      cloudObjs.push_back(subclouda);
+  }
+    
+    //cloudObjs.push_back(subcloud);
 
   }
 
