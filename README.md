@@ -12,7 +12,7 @@ This code have been tested under ROS Kinetic and Ubuntu 16.04. This is research 
 
 **Author: [Agustin Ortega](https://github.com/agusorte), aortega.jim@gmail.com**
 
-![project_selfdriving example: video](project_selfdriving/doc/vel.mp4)
+![project_selfdriving example: video](doc/vel.mp4)
 
 
 ## Installation
