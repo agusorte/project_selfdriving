@@ -87,6 +87,7 @@ create a folder data and move there
 	
 	mv _2017-12-06-20-02-29_Cam0Fltrd_VLP32C_Mall_Clockwise.bag data
 
+**Note: this is the tedious and boring part but is needed to run the program using rosbags.
 	
 
 ### kitti dataset (Experimental)
