@@ -1,7 +1,7 @@
 /*
- * project_velodyne_node.cpp
+ * project_selfdriving_node.cpp
  *
- *  Created on: Feb, 2018
+ *  Created on: July, 2018
  *  Author: Agustin Ortega 
  *  Email: aortega.jim@gmail.com
  */

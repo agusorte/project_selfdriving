@@ -1,6 +1,6 @@
 <launch>
 
-  <!-- project_velodyne.launch.launch
+  <!-- project_selfdriving_kitti.launch
   Autor: Agustin Ortega
   Email: aortega.jim@gmail.com -->
 
@@ -10,7 +10,7 @@
 
 
   <!-- rosbag -->
-  <node pkg="rosbag" type="play" name="rosbag"  args="$(find project_velodyne)/data/kitti_2011_09_26_drive_0084_synced.bag --clock"/>
+  <node pkg="rosbag" type="play" name="rosbag"  args="$(find project_selfdriving)/data/kitti_2011_09_26_drive_0084_synced.bag --clock"/>
 
   <!-- Console launch prefix -->
   <arg name="launch_prefix" default=""/>
@@ -20,8 +20,8 @@
   <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>
 
   <!-- Load parameters -->
-  <rosparam command="load" ns="darknet_ros" file="$(find darknet_ros)/config/ros2.yaml"/>
-  <rosparam command="load" ns="darknet_ros" file="$(find darknet_ros)/config/yolo_voc.yaml"/>
+  <rosparam command="load" ns="darknet_ros" file="$(find project_selfdriving)/config/ros2.yaml"/>
+  <rosparam command="load" ns="darknet_ros" file="$(find project_selfdriving)/config/yolov3.yaml"/>
 
   <!-- Start darknet and ros wrapper -->
   <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" output="screen" launch-prefix="$(arg launch_prefix)">
@@ -30,18 +30,18 @@
   </node>
 
   <!-- kitty file -->
-  <arg name="kitti_file_path"           default="$(find project_velodyne)/data/kitti_file.txt"/>
+  <arg name="kitti_file_path"           default="$(find project_selfdriving)/data/kitti_file.txt"/>
 
 
   <!-- Load parameters -->
-  <rosparam command="load" ns="project_velodyne_node" file="$(find project_velodyne)/config/cam_calib_kitti.yalm"/>
-  <rosparam command="load" ns="project_velodyne_node" file="$(find project_velodyne)/config/settings_kitti.yalm"/>
+  <rosparam command="load" ns="project_selfdriving_node" file="$(find project_selfdriving)/config/cam_calib_kitti.yalm"/>
+  <rosparam command="load" ns="project_selfdriving_node" file="$(find project_selfdriving)/config/settings_kitti.yalm"/>
 
-  <node pkg="project_velodyne" type="project_velodyne_node" name="project_velodyne_node" output="screen" launch-prefix="$(arg launch_prefix)">
+  <node pkg="project_selfdriving" type="project_selfdriving_node" name="project_selfdriving_node" output="screen" launch-prefix="$(arg launch_prefix)">
     <param name="kittifile"          value="$(arg kitti_file_path)" />
   </node>
 
-  <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find project_velodyne)/config/rvizConfig2.rviz"/>
+  <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find project_selfdriving)/config/rvizConfig2.rviz"/>
 
   
   

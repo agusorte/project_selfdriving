@@ -2,9 +2,9 @@
 #include "project_selfdriving/projectSelfdriving.hpp"
 
 /*
- * ProjectVelodyne.cpp
+ * ProjectSelfdriving.cpp
  *
- *  Created on: Feb, 2018
+ *  Created on: July, 2018
  *  Author: Agustin Ortega
  *  Email: aortega.jim@gmail.com
  */
